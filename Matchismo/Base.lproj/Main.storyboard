@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Card Game View Controller-->
@@ -17,6 +18,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Flips: 0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o4k-At-gY5">
+                                <rect key="frame" x="20" y="559" width="560" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ylg-Z1-RlG">
                                 <rect key="frame" x="268" y="252" width="64" height="96"/>
                                 <constraints>
@@ -34,10 +41,16 @@
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="0.25098040700000002" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="o4k-At-gY5" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="3Bj-oL-6xv"/>
                             <constraint firstItem="ylg-Z1-RlG" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="BOV-nx-CDu"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="o4k-At-gY5" secondAttribute="trailing" id="Uen-WH-WnF"/>
                             <constraint firstItem="ylg-Z1-RlG" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="fl2-MQ-JSq"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="o4k-At-gY5" secondAttribute="bottom" constant="20" id="hgQ-bH-26f"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="flipsLabel" destination="o4k-At-gY5" id="qSX-Ua-15x"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
