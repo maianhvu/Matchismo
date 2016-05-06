@@ -31,15 +31,18 @@
                           forState:UIControlStateNormal];
         [sender setTitle:@""
                 forState:UIControlStateNormal];
+        self.flipCount++;
     } else {
         Card *randomCard = [self.deck drawRandomCard];
         
-        [sender setBackgroundImage:[UIImage imageNamed:@"cardfront"]
-                          forState:UIControlStateNormal];
-        [sender setTitle:randomCard.contents
-                forState:UIControlStateNormal];
+        if (randomCard) {
+            [sender setBackgroundImage:[UIImage imageNamed:@"cardfront"]
+                              forState:UIControlStateNormal];
+            [sender setTitle:randomCard.contents
+                    forState:UIControlStateNormal];
+            self.flipCount++;
+        }
     }
-    self.flipCount++;
 }
 
 #pragma mark Deck
