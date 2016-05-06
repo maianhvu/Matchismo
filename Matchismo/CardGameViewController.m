@@ -13,7 +13,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *flipsLabel;
 @property (nonatomic) int flipCount;
-@property (strong, nonatomic) Deck *cardDeck;
+@property (strong, nonatomic) Deck *deck;
 
 @end
 
@@ -32,7 +32,7 @@
         [sender setTitle:@""
                 forState:UIControlStateNormal];
     } else {
-        Card *randomCard = [self.cardDeck drawRandomCard];
+        Card *randomCard = [self.deck drawRandomCard];
         
         [sender setBackgroundImage:[UIImage imageNamed:@"cardfront"]
                           forState:UIControlStateNormal];
@@ -44,9 +44,13 @@
 
 #pragma mark Deck
 
-- (Deck *)cardDeck {
-    if (!_cardDeck) _cardDeck = [[PlayingCardDeck alloc] init];
-    return _cardDeck;
+- (Deck *)deck {
+    if (!_deck) _deck = [self createDeck];
+    return _deck;
+}
+
+- (Deck *)createDeck {
+    return [[PlayingCardDeck alloc] init];
 }
 
 
