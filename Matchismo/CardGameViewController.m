@@ -35,6 +35,7 @@
     } else {
         Card *randomCard = [self.deck drawRandomCard];
         
+        // Protect against an empty deck
         if (randomCard) {
             [sender setBackgroundImage:[UIImage imageNamed:@"cardfront"]
                               forState:UIControlStateNormal];
