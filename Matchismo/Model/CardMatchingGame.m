@@ -8,9 +8,12 @@
 
 #import "CardMatchingGame.h"
 
+static const CardMatchingGameMode DEFAULT_GAME_MODE = CardGameModeMatch3;
+
 @interface CardMatchingGame()
 @property (nonatomic, readwrite) NSInteger score;
 @property (nonatomic, strong) NSMutableArray *cards; // of Card
+@property (nonatomic, strong) NSMutableArray *chosenCards; // of Card
 @end
 
 @implementation CardMatchingGame
@@ -21,12 +24,21 @@
     return _cards;
 }
 
+- (NSMutableArray *)chosenCards
+{
+    if (!_chosenCards) _chosenCards = [[NSMutableArray alloc] init];
+    return _chosenCards;
+}
+
 - (instancetype)initWithCardCount:(NSUInteger)count
                          withDeck:(Deck *)deck
 {
     self = [super init];
     
     if (self) {
+        // Set default properties
+        _gameMode = DEFAULT_GAME_MODE;
+        
         for (int i = 0; i < count; i++) {
             Card *card = [deck drawRandomCard];
             if (card) {
@@ -53,35 +65,50 @@ static const int COST_TO_CHOOSE = 1;
 {
     Card *card = [self cardAtIndex:index];
     
+    // Only allow unmatched cards to be chosen
     if (!card.isMatched) {
-        // Only allow unmatched cards to be chosen
+        // Flip over chosen card
         if (card.isChosen) {
             card.chosen = NO;
         } else {
-            // match atagainst other chosen cards
-            for (Card *otherCard in self.cards) {
-                if (otherCard.isChosen && !otherCard.isMatched) {
-                    int matchScore = [card match:@[otherCard]];
-                    if (matchScore) {
-                        self.score += matchScore * MATCH_BONUS;
-                        
-                        // If is a match then we consider both cards as matched
-                        otherCard.matched = YES;
+            // Add the current card to the array of chosen cards
+            [self.chosenCards addObject:card];
+           
+            // Calculate match score if condition for matching fulfils
+            if ([self hasHitChosenCardsLimit]) {
+                NSInteger matchScore = [self calculateMatchScore];
+                if (matchScore) {
+                    self.score += matchScore;
+                    for (Card *card in self.chosenCards) {
                         card.matched = YES;
-                    } else {
-                        self.score -= MISMATCH_PENALTY;
-                        // If is a mismatch, "unchoose" the mismatching other card
-                        otherCard.chosen = NO;
                     }
-                    // Only allow matching of 2 cards and we have found 2 matching cards at this point, we can exit the loop
-                    break;
+                } else {
+                    self.score -= MISMATCH_PENALTY;
+                    for (Card *card in self.chosenCards) {
+                        card.chosen = NO;
+                    }
                 }
+                // Erase the chosen cards
+                _chosenCards = nil;
+            } else {
+                // Just mark the card as chosen and move on
+                card.chosen = YES;
             }
             
             self.score -= COST_TO_CHOOSE;
-            card.chosen = YES;
         }
     }
+}
+
+- (BOOL)hasHitChosenCardsLimit
+{
+    return (self.gameMode == CardGameModeMatch2 && self.chosenCards.count >= 2) ||
+           (self.gameMode == CardGameModeMatch3 && self.chosenCards.count >= 3);
+}
+
+- (NSInteger)calculateMatchScore
+{
+    return 0; // TODO: Stub
 }
 
 @end

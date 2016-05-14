@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pUR-lo-loD">
-                                <rect key="frame" x="160" y="20" width="280" height="304"/>
+                                <rect key="frame" x="160" y="28" width="280" height="304"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ylg-Z1-RlG">
                                         <rect key="frame" x="0.0" y="0.0" width="64" height="96"/>
@@ -310,25 +310,56 @@
                                     <action selector="touchRedealButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eqM-hT-eGS"/>
                                 </connections>
                             </button>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="yVN-GM-uQV">
+                                <rect key="frame" x="220" y="393" width="160" height="29"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="28" id="GuB-Zf-UJL"/>
+                                    <constraint firstAttribute="width" constant="160" id="NhK-8e-jRI"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="2-card" width="80"/>
+                                    <segment title="3-card" width="80"/>
+                                </segments>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <action selector="changeMatchingModeSegmentedControl:" destination="BYZ-38-t0r" eventType="valueChanged" id="Phr-tk-Uxc"/>
+                                </connections>
+                            </segmentedControl>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Matching Mode" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nh2-Ae-B5F">
+                                <rect key="frame" x="240" y="364" width="120" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="120" id="cQH-oT-OTk"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="0.25098040700000002" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="bPC-y4-yQY" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="0gW-g2-DtQ"/>
-                            <constraint firstItem="pUR-lo-loD" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="13K-3u-Fbr"/>
+                            <constraint firstItem="pUR-lo-loD" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="13K-3u-Fbr"/>
                             <constraint firstItem="eVA-Ef-aRk" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="4q6-5c-ghx"/>
                             <constraint firstItem="pUR-lo-loD" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="7bm-2L-Ke1"/>
                             <constraint firstItem="eVA-Ef-aRk" firstAttribute="leading" secondItem="bPC-y4-yQY" secondAttribute="trailing" constant="8" id="9DN-kG-yP9"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="bPC-y4-yQY" secondAttribute="bottom" constant="20" id="Fkj-dB-f27"/>
+                            <constraint firstItem="Nh2-Ae-B5F" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Lav-O6-Of7"/>
+                            <constraint firstItem="Nh2-Ae-B5F" firstAttribute="top" secondItem="pUR-lo-loD" secondAttribute="bottom" constant="32" id="M79-jf-P7I"/>
                             <constraint firstItem="bPC-y4-yQY" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="Nzz-ma-aYT"/>
+                            <constraint firstItem="yVN-GM-uQV" firstAttribute="top" secondItem="Nh2-Ae-B5F" secondAttribute="bottom" constant="8" id="O0A-R7-gLP"/>
+                            <constraint firstItem="yVN-GM-uQV" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="OOv-vh-M9y"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="eVA-Ef-aRk" secondAttribute="bottom" constant="15" id="OhF-sv-j3f"/>
+                            <constraint firstItem="yVN-GM-uQV" firstAttribute="top" secondItem="pUR-lo-loD" secondAttribute="bottom" constant="8" id="fKd-Ta-UvR"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
+                                <exclude reference="fKd-Ta-UvR"/>
                                 <exclude reference="0gW-g2-DtQ"/>
                             </mask>
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="matchingModeSegmentedControl" destination="yVN-GM-uQV" id="PDb-W9-MqN"/>
                         <outlet property="scoreLabel" destination="bPC-y4-yQY" id="nS3-0J-42S"/>
                         <outletCollection property="cardButtons" destination="0rl-Dx-0Xe" id="la5-qU-6YI"/>
                         <outletCollection property="cardButtons" destination="EFy-JU-71l" id="638-7V-lyV"/>

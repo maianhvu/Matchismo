@@ -10,15 +10,24 @@
 #import "PlayingCardDeck.h"
 #import "CardMatchingGame.h"
 
+static int const SEGMENT_ID_MATCHING_MODE_2 = 0;
+static int const SEGMENT_ID_MATCHING_MODE_3 = 1;
+
 @interface CardGameViewController ()
 
 @property (strong, nonatomic) CardMatchingGame *game;
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *matchingModeSegmentedControl;
 
 @end
 
 @implementation CardGameViewController
+
+- (void)viewDidLoad
+{
+    [self updateUI];
+}
 
 - (CardMatchingGame *)game
 {
@@ -42,6 +51,14 @@
 
 - (void)updateUI
 {
+    // Select the correct segment based on the default game mode
+    if (self.game.gameMode == CardGameModeMatch2) {
+        self.matchingModeSegmentedControl.selectedSegmentIndex = SEGMENT_ID_MATCHING_MODE_2;
+    } else if (self.game.gameMode == CardGameModeMatch3) {
+        self.matchingModeSegmentedControl.selectedSegmentIndex = SEGMENT_ID_MATCHING_MODE_3;
+    }
+    
+    // Update buttons' appearance
     for (UIButton *cardButton in self.cardButtons) {
         int cardButtonIndex = (int) [self.cardButtons indexOfObject:cardButton];
         Card *card = [self.game cardAtIndex:cardButtonIndex];
@@ -67,6 +84,15 @@
 
 - (Deck *)createDeck {
     return [[PlayingCardDeck alloc] init];
+}
+
+#pragma mark Matching Mode
+- (IBAction)changeMatchingModeSegmentedControl:(UISegmentedControl *)sender {
+    if (sender.selectedSegmentIndex == SEGMENT_ID_MATCHING_MODE_2) {
+        self.game.gameMode = CardGameModeMatch2;
+    } else if (sender.selectedSegmentIndex == SEGMENT_ID_MATCHING_MODE_3) {
+        self.game.gameMode = CardGameModeMatch3;
+    }
 }
 
 @end

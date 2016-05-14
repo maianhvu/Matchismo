@@ -9,7 +9,13 @@
 #import <Foundation/Foundation.h>
 #import "Deck.h"
 
+typedef NS_ENUM(NSInteger, CardMatchingGameMode) {
+    CardGameModeMatch2,
+    CardGameModeMatch3
+};
+
 @interface CardMatchingGame : NSObject
+
 
 // Designated initializer
 - (instancetype)initWithCardCount:(NSUInteger)count
@@ -18,5 +24,6 @@
 - (Card *)cardAtIndex:(NSUInteger)index;
 
 @property (nonatomic, readonly) NSInteger score;
+@property (nonatomic) CardMatchingGameMode gameMode;
 
 @end
