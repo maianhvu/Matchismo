@@ -292,20 +292,41 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score: 0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bPC-y4-yQY">
-                                <rect key="frame" x="20" y="559" width="560" height="21"/>
+                                <rect key="frame" x="20" y="559" width="469" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eVA-Ef-aRk">
+                                <rect key="frame" x="497" y="555" width="83" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="XaB-Ak-dq3"/>
+                                    <constraint firstAttribute="width" constant="83" id="maN-Pq-QEb"/>
+                                </constraints>
+                                <state key="normal" title="Re-deal">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="touchRedealButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eqM-hT-eGS"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="0.25098040700000002" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="bPC-y4-yQY" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="0gW-g2-DtQ"/>
                             <constraint firstItem="pUR-lo-loD" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="13K-3u-Fbr"/>
+                            <constraint firstItem="eVA-Ef-aRk" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="4q6-5c-ghx"/>
                             <constraint firstItem="pUR-lo-loD" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="7bm-2L-Ke1"/>
+                            <constraint firstItem="eVA-Ef-aRk" firstAttribute="leading" secondItem="bPC-y4-yQY" secondAttribute="trailing" constant="8" id="9DN-kG-yP9"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="bPC-y4-yQY" secondAttribute="bottom" constant="20" id="Fkj-dB-f27"/>
                             <constraint firstItem="bPC-y4-yQY" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="Nzz-ma-aYT"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="eVA-Ef-aRk" secondAttribute="bottom" constant="15" id="OhF-sv-j3f"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="0gW-g2-DtQ"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <outlet property="scoreLabel" destination="bPC-y4-yQY" id="nS3-0J-42S"/>

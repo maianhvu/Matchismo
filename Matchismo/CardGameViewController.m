@@ -34,6 +34,12 @@
     [self updateUI];
 }
 
+- (IBAction)touchRedealButton:(UIButton *)sender {
+    _game = nil;
+    // Reset all card to face down
+    [self updateUI];
+}
+
 - (void)updateUI
 {
     for (UIButton *cardButton in self.cardButtons) {
