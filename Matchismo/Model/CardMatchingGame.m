@@ -73,6 +73,7 @@ static const int COST_TO_CHOOSE = 1;
         } else {
             // Add the current card to the array of chosen cards
             [self.chosenCards addObject:card];
+            card.chosen = YES;
            
             // Calculate match score if condition for matching fulfils
             if ([self hasHitChosenCardsLimit]) {
@@ -90,9 +91,6 @@ static const int COST_TO_CHOOSE = 1;
                 }
                 // Erase the chosen cards
                 _chosenCards = nil;
-            } else {
-                // Just mark the card as chosen and move on
-                card.chosen = YES;
             }
             
             self.score -= COST_TO_CHOOSE;
@@ -108,7 +106,19 @@ static const int COST_TO_CHOOSE = 1;
 
 - (NSInteger)calculateMatchScore
 {
-    return 0; // TODO: Stub
+    int numberOfCardsToMatch = (int) self.chosenCards.count;
+    if (numberOfCardsToMatch > 2 && self.gameMode == CardGameModeMatch2) {
+        numberOfCardsToMatch = 2;
+    } else if (numberOfCardsToMatch > 3 && self.gameMode == CardGameModeMatch3) {
+        numberOfCardsToMatch = 3;
+    }
+    
+    int score = 0;
+    for (int i = 0; i < numberOfCardsToMatch - 1; i++) {
+        NSArray *theRestOfChosenCards = [self.chosenCards subarrayWithRange: NSMakeRange(i+1, numberOfCardsToMatch - i - 1)];
+        score += [self.chosenCards[i] match:theRestOfChosenCards];
+    }
+    return score;
 }
 
 @end
