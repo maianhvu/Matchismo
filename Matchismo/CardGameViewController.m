@@ -20,12 +20,15 @@ static int const SEGMENT_ID_MATCHING_MODE_3 = 1;
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *matchingModeSegmentedControl;
 
+@property (nonatomic) BOOL playerStartedGame;
+
 @end
 
 @implementation CardGameViewController
 
 - (void)viewDidLoad
 {
+    self.playerStartedGame = NO;
     [self updateUI];
 }
 
@@ -39,19 +42,26 @@ static int const SEGMENT_ID_MATCHING_MODE_3 = 1;
 - (IBAction)touchCardButton:(UIButton *)sender
 {
     int chosenButtonIndex = (int) [self.cardButtons indexOfObject:sender];
-    
     [self.game chooseCardAtIndex:chosenButtonIndex];
+    
+    self.playerStartedGame = YES;
     [self updateUI];
 }
 
 - (IBAction)touchRedealButton:(UIButton *)sender {
     _game = nil;
+    self.playerStartedGame = NO;
     // Reset all card to face down
     [self updateUI];
 }
 
 - (void)updateUI
 {
+    // Disable or enable the segmented control for when the game just started
+    if (self.matchingModeSegmentedControl.enabled == self.playerStartedGame) {
+        self.matchingModeSegmentedControl.enabled = !self.playerStartedGame;
+    }
+    
     // Select the correct segment based on the default game mode
     if (self.game.gameMode == CardGameModeMatch2) {
         self.matchingModeSegmentedControl.selectedSegmentIndex = SEGMENT_ID_MATCHING_MODE_2;
