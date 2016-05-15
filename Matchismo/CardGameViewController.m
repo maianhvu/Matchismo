@@ -39,6 +39,7 @@ static int const SEGMENT_ID_MATCHING_MODE_3 = 1;
 - (IBAction)touchCardButton:(UIButton *)sender
 {
     int chosenButtonIndex = (int) [self.cardButtons indexOfObject:sender];
+    
     [self.game chooseCardAtIndex:chosenButtonIndex];
     [self updateUI];
 }

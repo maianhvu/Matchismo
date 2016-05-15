@@ -9,11 +9,14 @@
 #import "CardMatchingGame.h"
 
 static const CardMatchingGameMode DEFAULT_GAME_MODE = CardGameModeMatch3;
+static const int MISMATCH_PENALTY = 2;
+static const int MATCH_BONUS = 4;
+static const int COST_TO_CHOOSE = 1;
+
 
 @interface CardMatchingGame()
 @property (nonatomic, readwrite) NSInteger score;
-@property (nonatomic, strong) NSMutableArray *cards; // of Card
-@property (nonatomic, strong) NSMutableArray *chosenCards; // of Card
+@property (nonatomic, strong) NSMutableArray *cards; // of Cards
 @end
 
 @implementation CardMatchingGame
@@ -22,12 +25,6 @@ static const CardMatchingGameMode DEFAULT_GAME_MODE = CardGameModeMatch3;
 {
     if (!_cards) _cards = [[NSMutableArray alloc] init];
     return _cards;
-}
-
-- (NSMutableArray *)chosenCards
-{
-    if (!_chosenCards) _chosenCards = [[NSMutableArray alloc] init];
-    return _chosenCards;
 }
 
 - (instancetype)initWithCardCount:(NSUInteger)count
@@ -57,68 +54,49 @@ static const CardMatchingGameMode DEFAULT_GAME_MODE = CardGameModeMatch3;
     return (index < [self.cards count]) ? self.cards[index] : nil;
 }
 
-static const int MISMATCH_PENALTY = 2;
-static const int MATCH_BONUS = 4;
-static const int COST_TO_CHOOSE = 1;
-
 - (void)chooseCardAtIndex:(NSUInteger)index
 {
     Card *card = [self cardAtIndex:index];
     
-    // Only allow unmatched cards to be chosen
     if (!card.isMatched) {
-        // Flip over chosen card
         if (card.isChosen) {
+            // Flip the card over
             card.chosen = NO;
         } else {
-            // Add the current card to the array of chosen cards
-            [self.chosenCards addObject:card];
-            card.chosen = YES;
-           
-            // Calculate match score if condition for matching fulfils
-            if ([self hasHitChosenCardsLimit]) {
-                NSInteger matchScore = [self calculateMatchScore];
-                if (matchScore) {
-                    self.score += matchScore;
-                    for (Card *card in self.chosenCards) {
-                        card.matched = YES;
-                    }
-                } else {
-                    self.score -= MISMATCH_PENALTY;
-                    for (Card *card in self.chosenCards) {
-                        card.chosen = NO;
-                    }
+            NSMutableArray *chosenCards = [[NSMutableArray alloc] init];
+            for (Card *otherCard in self.cards) {
+                if (!otherCard.isMatched && otherCard.isChosen) {
+                    [chosenCards addObject:otherCard];
                 }
-                // Erase the chosen cards
-                _chosenCards = nil;
             }
             
-            self.score -= COST_TO_CHOOSE;
+            if ([self sufficesForMatchingWithCardsCount: (int)chosenCards.count + 1]) {
+                int score = [card match:chosenCards];
+                if (score) {
+                    self.score += score * MATCH_BONUS;
+                    // Make all cards be matched
+                    for (Card *otherCard in chosenCards) {
+                        otherCard.matched = YES;
+                    }
+                    card.matched = YES;
+                } else {
+                    self.score -= MISMATCH_PENALTY;
+                    // Flip down all cards except the current one
+                    for (Card *otherCard in chosenCards) {
+                        otherCard.chosen = NO;
+                    }
+                }
+            }
         }
     }
-}
-
-- (BOOL)hasHitChosenCardsLimit
-{
-    return (self.gameMode == CardGameModeMatch2 && self.chosenCards.count >= 2) ||
-           (self.gameMode == CardGameModeMatch3 && self.chosenCards.count >= 3);
-}
-
-- (NSInteger)calculateMatchScore
-{
-    int numberOfCardsToMatch = (int) self.chosenCards.count;
-    if (numberOfCardsToMatch > 2 && self.gameMode == CardGameModeMatch2) {
-        numberOfCardsToMatch = 2;
-    } else if (numberOfCardsToMatch > 3 && self.gameMode == CardGameModeMatch3) {
-        numberOfCardsToMatch = 3;
-    }
     
-    int score = 0;
-    for (int i = 0; i < numberOfCardsToMatch - 1; i++) {
-        NSArray *theRestOfChosenCards = [self.chosenCards subarrayWithRange: NSMakeRange(i+1, numberOfCardsToMatch - i - 1)];
-        score += [self.chosenCards[i] match:theRestOfChosenCards];
-    }
-    return score;
+    card.chosen = YES;
+}
+
+- (BOOL)sufficesForMatchingWithCardsCount:(int)cardsCount
+{
+    return (self.gameMode == CardGameModeMatch2 && cardsCount >= 2) ||
+           (self.gameMode == CardGameModeMatch3 && cardsCount >= 3);
 }
 
 @end

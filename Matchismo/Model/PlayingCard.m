@@ -8,6 +8,13 @@
 
 #import "PlayingCard.h"
 
+int square(int x) {
+    return x * x;
+}
+
+static int const BONUS_SAME_RANK = 4;
+static int const BONUS_SAME_SUIT = 1;
+
 @implementation PlayingCard
 
 - (NSString *)contents {
@@ -48,18 +55,58 @@
 
 - (int)match:(NSArray *)otherCards
 {
-    int score = 0;
+    NSArray *allCards = [otherCards arrayByAddingObject:self];
+    int sameRankCardsCount = [PlayingCard countCardsOfSameRanksFromArray:allCards];
+    int sameSuitCardsCount = [PlayingCard countCardsOfSameSuitsFromArray:allCards];
+    return square(sameRankCardsCount) * BONUS_SAME_RANK
+        + square(sameSuitCardsCount) * BONUS_SAME_SUIT;
+}
+
++ (int)countCardsOfSameRanksFromArray:(NSArray *)cards // of PlayingCards
+{
+    NSArray *cardsSortedByRanks = [cards sortedArrayUsingComparator:^(id card1, id card2) {
+        NSAssert([card1 isKindOfClass:[PlayingCard class]], @"The first card must be a PlayingCard");
+        NSAssert([card2 isKindOfClass:[PlayingCard class]], @"The second card must be a PlayingCard");
+        
+        PlayingCard *playingCard1 = card1;
+        PlayingCard *playingCard2 = card2;
+        
+        return [[NSNumber numberWithInteger:playingCard1.rank] compare:[NSNumber numberWithInteger:playingCard2.rank]];
+    }];
     
-    if ([otherCards count] == 1) {
-        PlayingCard *otherCard = [otherCards firstObject];
-        if (otherCard.rank == self.rank) {
-            score = 4;
-        } else if ([otherCard.suit isEqualToString:self.suit]){
-            score = 1;
+    PlayingCard *previousCard = nil;
+    int duplicates = 0;
+    for (PlayingCard *card in cardsSortedByRanks) {
+        if (previousCard && card.rank == previousCard.rank) {
+            duplicates++;
         }
+        previousCard = card;
+    }
+    return duplicates;
+}
+
++ (int)countCardsOfSameSuitsFromArray:(NSArray *)cards // of PlayingCards
+{
+    NSArray *cardsSortedBySuits = [cards sortedArrayUsingComparator: ^(id card1, id card2) {
+        PlayingCard *playingCard1 = card1;
+        PlayingCard *playingCard2 = card2;
+        return [playingCard1.suit compare:playingCard2.suit];
+    }];
+    
+    PlayingCard *previousCard = nil;
+    int duplicates = 0;
+    for (PlayingCard *card in cardsSortedBySuits) {
+        if (previousCard && [card.suit isEqualToString:previousCard.suit]) {
+            duplicates++;
+        }
+        previousCard = card;
     }
     
-    return score;
+    return duplicates;
+}
+
+- (NSString *)description {
+    return [self contents];
 }
 
 @end
