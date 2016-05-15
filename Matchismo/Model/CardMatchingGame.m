@@ -16,6 +16,7 @@ static const int COST_TO_CHOOSE = 1;
 
 @interface CardMatchingGame()
 @property (nonatomic, readwrite) NSInteger score;
+@property (strong, nonatomic, readwrite) CardChoosingResult *previousChoosingResult;
 @property (nonatomic, strong) NSMutableArray *cards; // of Cards
 @end
 
@@ -57,41 +58,71 @@ static const int COST_TO_CHOOSE = 1;
 - (void)chooseCardAtIndex:(NSUInteger)index
 {
     Card *card = [self cardAtIndex:index];
+    // Remember choosing result
+    NSArray *rememberedChosenCards = @[card];
+    BOOL isMatchPerformed = NO;
+    NSInteger scoreOffset = 0;
     
     if (!card.isMatched) {
         if (card.isChosen) {
             // Flip the card over
             card.chosen = NO;
+            // Since we flipped it over it's no longer considered a choice
+            rememberedChosenCards = @[];
         } else {
             NSMutableArray *chosenCards = [[NSMutableArray alloc] init];
             for (Card *otherCard in self.cards) {
-                if (!otherCard.isMatched && otherCard.isChosen) {
+                // Skip matched cards
+                if (otherCard.isMatched) {
+                    continue;
+                }
+                
+                // Do not consider cards that were included in the previous choosing
+                // if it was a match
+                if (self.previousChoosingResult.isMatchPerformed &&
+                    [self.previousChoosingResult.cards containsObject:otherCard]) {
+                    // Unchoose card (flip it back down) and continue
+                    otherCard.chosen = NO;
+                    continue;
+                }
+                
+                if (otherCard.isChosen) {
                     [chosenCards addObject:otherCard];
                 }
             }
             
             if ([self sufficesForMatchingWithCardsCount: (int)chosenCards.count + 1]) {
+                isMatchPerformed = YES;
+            
                 int score = [card match:chosenCards];
                 if (score) {
-                    self.score += score * MATCH_BONUS;
+                    scoreOffset = score * MATCH_BONUS;
                     // Make all cards be matched
                     for (Card *otherCard in chosenCards) {
                         otherCard.matched = YES;
                     }
                     card.matched = YES;
                 } else {
-                    self.score -= MISMATCH_PENALTY;
+                    scoreOffset = -MISMATCH_PENALTY;
                     // Flip down all cards except the current one
                     for (Card *otherCard in chosenCards) {
                         otherCard.chosen = NO;
                     }
                 }
+                
+                // Remember card choices
+                rememberedChosenCards = [chosenCards arrayByAddingObject:card];
             }
         }
     }
     
     card.chosen = YES;
-    self.score -= COST_TO_CHOOSE;
+    self.score += scoreOffset - COST_TO_CHOOSE;
+    
+    // Save previous match
+    self.previousChoosingResult = [[CardChoosingResult alloc] initWithCards:rememberedChosenCards
+                                                         withMatchPerformed:isMatchPerformed
+                                                                  withScore:scoreOffset];
 }
 
 - (BOOL)sufficesForMatchingWithCardsCount:(int)cardsCount

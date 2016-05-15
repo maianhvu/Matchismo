@@ -334,6 +334,12 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6UU-Gn-jfJ">
+                                <rect key="frame" x="20" y="530" width="560" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="0.25098040700000002" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -343,6 +349,7 @@
                             <constraint firstItem="pUR-lo-loD" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="7bm-2L-Ke1"/>
                             <constraint firstItem="eVA-Ef-aRk" firstAttribute="leading" secondItem="bPC-y4-yQY" secondAttribute="trailing" constant="8" id="9DN-kG-yP9"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="bPC-y4-yQY" secondAttribute="bottom" constant="20" id="Fkj-dB-f27"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="6UU-Gn-jfJ" secondAttribute="trailing" id="KDM-Hj-T6k"/>
                             <constraint firstItem="Nh2-Ae-B5F" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Lav-O6-Of7"/>
                             <constraint firstItem="Nh2-Ae-B5F" firstAttribute="top" secondItem="pUR-lo-loD" secondAttribute="bottom" constant="32" id="M79-jf-P7I"/>
                             <constraint firstItem="bPC-y4-yQY" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="Nzz-ma-aYT"/>
@@ -350,6 +357,8 @@
                             <constraint firstItem="yVN-GM-uQV" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="OOv-vh-M9y"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="eVA-Ef-aRk" secondAttribute="bottom" constant="15" id="OhF-sv-j3f"/>
                             <constraint firstItem="yVN-GM-uQV" firstAttribute="top" secondItem="pUR-lo-loD" secondAttribute="bottom" constant="8" id="fKd-Ta-UvR"/>
+                            <constraint firstItem="eVA-Ef-aRk" firstAttribute="top" secondItem="6UU-Gn-jfJ" secondAttribute="bottom" constant="4" id="s0f-sn-XIn"/>
+                            <constraint firstItem="6UU-Gn-jfJ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="te7-AR-rZt"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
@@ -359,6 +368,7 @@
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="cardChoosingResultLabel" destination="6UU-Gn-jfJ" id="ArO-Iq-6OF"/>
                         <outlet property="matchingModeSegmentedControl" destination="yVN-GM-uQV" id="PDb-W9-MqN"/>
                         <outlet property="scoreLabel" destination="bPC-y4-yQY" id="nS3-0J-42S"/>
                         <outletCollection property="cardButtons" destination="0rl-Dx-0Xe" id="la5-qU-6YI"/>

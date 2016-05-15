@@ -9,6 +9,7 @@
 #import "CardGameViewController.h"
 #import "PlayingCardDeck.h"
 #import "CardMatchingGame.h"
+#import "CardChoosingResult.h"
 
 static int const SEGMENT_ID_MATCHING_MODE_2 = 0;
 static int const SEGMENT_ID_MATCHING_MODE_3 = 1;
@@ -21,6 +22,7 @@ static int const SEGMENT_ID_MATCHING_MODE_3 = 1;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *matchingModeSegmentedControl;
 
 @property (nonatomic) BOOL playerStartedGame;
+@property (weak, nonatomic) IBOutlet UILabel *cardChoosingResultLabel;
 
 @end
 
@@ -79,6 +81,28 @@ static int const SEGMENT_ID_MATCHING_MODE_3 = 1;
         self.scoreLabel.text = [NSString stringWithFormat:@"Score: %d", (int) self.game.score];
     }
     
+    // Update previous choosing result if any
+    CardChoosingResult *result = self.game.previousChoosingResult;
+    
+    if (result && result.cards.count > 0) {
+        if (result.isMatchPerformed) {
+            NSString *cardsRepresentation = [CardGameViewController stringRepresentationOfCards:result.cards];
+            // Gained score
+            if (result.score > 0) {
+                self.cardChoosingResultLabel.text = [NSString stringWithFormat:@"Matched %@ for %d points.",
+                                                     cardsRepresentation, (int)result.score];
+            }
+            // Received penalty
+            else {
+                self.cardChoosingResultLabel.text = [NSString stringWithFormat:@"%@ don't match! %d points penalty.",
+                                                     cardsRepresentation, (int)-result.score];
+            }
+        } else {
+            self.cardChoosingResultLabel.text = [result.cards.lastObject contents];
+        }
+    } else {
+        self.cardChoosingResultLabel.text = @"";
+    }
 }
 
 - (NSString *)titleForCard:(Card *)card
@@ -104,6 +128,15 @@ static int const SEGMENT_ID_MATCHING_MODE_3 = 1;
     } else if (sender.selectedSegmentIndex == SEGMENT_ID_MATCHING_MODE_3) {
         self.game.gameMode = CardGameModeMatch3;
     }
+}
+
++ (NSString *)stringRepresentationOfCards:(NSArray *)cards
+{
+    NSMutableArray *contents = [[NSMutableArray alloc] initWithCapacity:cards.count];
+    for (Card *card in cards) {
+        [contents addObject:card.contents];
+    }
+    return [contents componentsJoinedByString:@" "];
 }
 
 @end

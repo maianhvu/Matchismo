@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "Deck.h"
+#import "CardChoosingResult.h"
 
 typedef NS_ENUM(NSInteger, CardMatchingGameMode) {
     CardGameModeMatch2,
@@ -25,5 +26,6 @@ typedef NS_ENUM(NSInteger, CardMatchingGameMode) {
 
 @property (nonatomic, readonly) NSInteger score;
 @property (nonatomic) CardMatchingGameMode gameMode;
+@property (strong, nonatomic, readonly) CardChoosingResult *previousChoosingResult;
 
 @end
