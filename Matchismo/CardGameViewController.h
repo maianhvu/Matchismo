@@ -7,9 +7,21 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Deck.h"
+#import "CardMatchingGame.h"
 
+// Abstract class
 @interface CardGameViewController : UIViewController
 
+@property (strong, nonatomic) IBOutletCollection(UIView) NSArray *cardButtons;
+@property (strong, nonatomic) CardMatchingGame *game;
+@property (nonatomic) BOOL playerStartedGame;
+
+// Abstract method. Must override
+- (Deck *)createDeck;
+
+// Protected
+- (void)updateUI;
 
 @end
 
