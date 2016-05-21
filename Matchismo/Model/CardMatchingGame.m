@@ -7,11 +7,12 @@
 //
 
 #import "CardMatchingGame.h"
+#import "FunctionalInterface.h"
 
 static const CardMatchingGameMode DEFAULT_GAME_MODE = CardGameModeMatch2;
 static const int MISMATCH_PENALTY = 2;
 static const int MATCH_BONUS = 4;
-static const int COST_TO_CHOOSE = 1;
+static const int COST_TO_CHOOSE = 0;
 
 
 @interface CardMatchingGame()
@@ -50,7 +51,7 @@ static const int COST_TO_CHOOSE = 1;
     return self;
 }
 
-- (Card *) cardAtIndex:(NSUInteger)index
+- (Card *)cardAtIndex:(NSUInteger)index
 {
     return (index < [self.cards count]) ? self.cards[index] : nil;
 }
@@ -95,30 +96,43 @@ static const int COST_TO_CHOOSE = 1;
                 isMatchPerformed = YES;
             
                 int score = [card match:chosenCards];
+                NSArray *allCards = [chosenCards arrayByAddingObject:card];
+                void (^cardAction)(id) = nil;
+                
                 if (score) {
                     scoreOffset = score * MATCH_BONUS;
-                    // Make all cards be matched
-                    for (Card *otherCard in chosenCards) {
-                        otherCard.matched = YES;
-                    }
-                    card.matched = YES;
+                    // Make all cards be matched and chosen
+                    cardAction = ^(id cardObject) {
+                        Card *card = (Card *)cardObject;
+                        card.matched = YES;
+                        card.chosen = YES;
+                    };
                 } else {
                     scoreOffset = -MISMATCH_PENALTY;
+                    // Unselect all cards
+                    cardAction = ^(id cardObject) {
+                        Card *card = (Card *)cardObject;
+                        card.chosen = NO;
+                    };
                 }
+                [allCards forEach:cardAction];
                 
                 // Remember card choices
                 rememberedChosenCards = [chosenCards arrayByAddingObject:card];
+            } else {
+                // Just choose the card
+                card.chosen = YES;
             }
+            
+            self.score += scoreOffset - COST_TO_CHOOSE;
+            
         }
+        
+        // Save previous match
+        self.previousChoosingResult = [[CardChoosingResult alloc] initWithCards:rememberedChosenCards
+                                                             withMatchPerformed:isMatchPerformed
+                                                                      withScore:scoreOffset];
     }
-    
-    card.chosen = YES;
-    self.score += scoreOffset - COST_TO_CHOOSE;
-    
-    // Save previous match
-    self.previousChoosingResult = [[CardChoosingResult alloc] initWithCards:rememberedChosenCards
-                                                         withMatchPerformed:isMatchPerformed
-                                                                  withScore:scoreOffset];
 }
 
 - (BOOL)sufficesForMatchingWithCardsCount:(int)cardsCount

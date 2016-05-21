@@ -119,14 +119,24 @@ static CGFloat const CARD_STROKE_WIDTH = 4.0;
     UIBezierPath *roundedRect = [UIBezierPath bezierPathWithRoundedRect:self.bounds
                                                            cornerRadius:[self cornerRadius]];
     [roundedRect addClip];
-    [[UIColor whiteColor] setFill];
-    UIRectFill(self.bounds);
     
     // Change display based on whether the card is chosen
-    if (self.isHighlighted) {
-        [[UIColor yellowColor] setStroke];
-        roundedRect.lineWidth = CARD_STROKE_WIDTH;
-        [roundedRect stroke];
+    if (self.isFadedOut) {
+        [[SetCardView fadedOutColor] setFill];
+        UIRectFill(self.bounds);
+    } else {
+        CGRect whiteBackgroundRect = self.bounds;
+        
+        if (self.isHighlighted) {
+            // Draw border
+            [[SetCardView highlightColor] setFill];
+            [roundedRect fill];
+            // Make background rect smaller
+            whiteBackgroundRect = CGRectInset(self.bounds, CARD_STROKE_WIDTH, CARD_STROKE_WIDTH);
+        }
+        
+        [[SetCardView normalBackgroundColor] setFill];
+        UIRectFill(whiteBackgroundRect);
     }
     
     [self drawSymbols];
@@ -297,6 +307,21 @@ static CGFloat const CARD_STROKE_WIDTH = 4.0;
         // Initialization code
     }
     return self;
+}
+
+#pragma mark - Colors
+
++ (UIColor *)fadedOutColor
+{
+    return [UIColor colorWithWhite:1.0 alpha:0.5];
+}
++ (UIColor *)highlightColor
+{
+    return [UIColor cyanColor];
+}
++ (UIColor *)normalBackgroundColor
+{
+    return [UIColor whiteColor];
 }
 
 @end

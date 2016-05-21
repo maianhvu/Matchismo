@@ -84,10 +84,14 @@
             SetCardView *cardView = (SetCardView *) self.cardButtons[cardIndex];
             SetCard *card = (SetCard *) [self.game cardAtIndex:cardIndex];
             [cardView setCard:card];
+            
+            if ([self.game.previousChoosingResult.cards containsObject:card]) {
+                cardView.highlighted = YES;
+            }
         }
     }
     
-    // [super updateUI];
+    [super updateUI];
 }
 
 @end

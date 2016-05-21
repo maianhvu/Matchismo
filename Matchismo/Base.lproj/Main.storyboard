@@ -463,7 +463,7 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qY9-9b-g9Y">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qY9-9b-g9Y">
                                 <rect key="frame" x="160" y="28" width="280" height="400"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vZu-4t-8gH" customClass="SetCardView">
@@ -612,7 +612,7 @@
                                     </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="332" id="9Na-Gu-GYl"/>
+                                    <constraint firstAttribute="height" constant="400" id="9Na-Gu-GYl"/>
                                     <constraint firstAttribute="width" constant="280" id="RBf-2q-UnE"/>
                                 </constraints>
                             </view>
@@ -643,8 +643,8 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Set" id="jNO-X1-WjH"/>
                     <connections>
-                        <outlet property="cardChoosingResultLabel" destination="6b4-dB-xjE" id="2ku-ZP-Efx"/>
-                        <outlet property="scoreLabel" destination="qYx-ZZ-JD0" id="ks3-My-02Q"/>
+                        <outlet property="cardChoosingResultLabel" destination="6b4-dB-xjE" id="oTy-41-GI6"/>
+                        <outlet property="scoreLabel" destination="qYx-ZZ-JD0" id="GJ6-5o-Vcy"/>
                         <outletCollection property="cardButtons" destination="k4b-ZX-IC2" id="rCG-Wg-Tl0"/>
                         <outletCollection property="cardButtons" destination="vZu-4t-8gH" id="J5b-f6-dGN"/>
                         <outletCollection property="cardButtons" destination="zGD-4Z-deh" id="WcF-T3-nif"/>

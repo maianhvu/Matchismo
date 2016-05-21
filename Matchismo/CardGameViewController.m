@@ -8,6 +8,7 @@
 
 #import "CardGameViewController.h"
 #import "CardChoosingResult.h"
+#import "FunctionalInterface.h"
 
 @interface CardGameViewController ()
 
@@ -51,8 +52,8 @@
             NSString *cardsRepresentation = [CardGameViewController stringRepresentationOfCards:result.cards];
             // Gained score
             if (result.score > 0) {
-                self.cardChoosingResultLabel.text = [NSString stringWithFormat:@"Matched %@ for %d points.",
-                                                     cardsRepresentation, (int)result.score];
+                self.cardChoosingResultLabel.text = [NSString stringWithFormat:@"Matched %@ for %d points!",
+                                                     cardsRepresentation, (int) result.score];
             }
             // Received penalty
             else {
@@ -75,10 +76,10 @@
 
 + (NSString *)stringRepresentationOfCards:(NSArray *)cards
 {
-    NSMutableArray *contents = [[NSMutableArray alloc] initWithCapacity:cards.count];
-    for (Card *card in cards) {
-        [contents addObject:card.contents];
-    }
+    NSArray *contents = [cards map:^(id cardObj){
+        Card* card = (Card *)cardObj;
+        return [card contents];
+    }];
     return [contents componentsJoinedByString:@" "];
 }
 

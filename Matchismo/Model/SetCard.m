@@ -7,6 +7,7 @@
 //
 
 #import "SetCard.h"
+#import "FunctionalInterface.h"
 
 @implementation SetCard
 
@@ -54,10 +55,64 @@
 {
     
     return @[
-        [UIColor redColor],
-        [UIColor greenColor],
-        [UIColor purpleColor]
-        ];
+             [UIColor redColor],
+             [UIColor greenColor],
+             [UIColor purpleColor]
+             ];
 }
 
+#pragma mark - Functionality
+
+- (int)match:(NSArray *)otherCards
+{
+    NSArray *allCards = [otherCards arrayByAddingObject:self];
+    if ([SetCard isASet:allCards]) {
+        return 1;
+    } else {
+        return 0;
+    }
+}
+
+
++ (BOOL)isASet:(NSArray *)array
+{
+    // Compare numbers
+    NSArray *uniqueNumbers = [[array map:^(id cardObj) {
+        SetCard *card = (SetCard *)cardObj;
+        return @(card.number);
+    }] uniqueNumbers];
+    if ([uniqueNumbers count] != 1 && [uniqueNumbers count] != 3) {
+        return NO;
+    }
+    
+    // Compare symbols
+    NSArray *uniqueSymbols = [[array map:^(id cardObj) {
+        SetCard *card = (SetCard *)cardObj;
+        return @(card.symbol);
+    }] uniqueNumbers];
+    if ([uniqueSymbols count] != 1 && [uniqueSymbols count] != 3) {
+        return NO;
+    }
+    
+    // Compare shadings
+    NSArray *uniqueShadings = [[array map:^(id cardObj) {
+        SetCard *card = (SetCard *)cardObj;
+        return @(card.shading);
+    }] uniqueNumbers];
+    if ([uniqueShadings count] != 1 && [uniqueShadings count] != 3) {
+        return NO;
+    }
+    
+    // Compare UIColors
+    NSArray *uniqueColors = [[array map:^(id cardObj) {
+        SetCard *card = (SetCard *)cardObj;
+        return card.color;
+    }] uniqueUsingDescription];
+    if ([uniqueColors count] != 1 && [uniqueColors count] != 3) {
+        return NO;
+    }
+    
+    // Satisfied all conditions
+    return YES;
+}
 @end
