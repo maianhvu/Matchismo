@@ -8,7 +8,7 @@
 
 #import "CardMatchingGame.h"
 
-static const CardMatchingGameMode DEFAULT_GAME_MODE = CardGameModeMatch3;
+static const CardMatchingGameMode DEFAULT_GAME_MODE = CardGameModeMatch2;
 static const int MISMATCH_PENALTY = 2;
 static const int MATCH_BONUS = 4;
 static const int COST_TO_CHOOSE = 1;
@@ -104,10 +104,6 @@ static const int COST_TO_CHOOSE = 1;
                     card.matched = YES;
                 } else {
                     scoreOffset = -MISMATCH_PENALTY;
-                    // Flip down all cards except the current one
-                    for (Card *otherCard in chosenCards) {
-                        otherCard.chosen = NO;
-                    }
                 }
                 
                 // Remember card choices

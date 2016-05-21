@@ -54,6 +54,16 @@ static int const SEGMENT_ID_MATCHING_MODE_3 = 1;
     
     [super updateUI];
 }
+
+- (IBAction)touchCardButton:(UIButton *)sender
+{
+    int chosenButtonIndex = (int) [self.cardButtons indexOfObject:sender];
+    [self.game chooseCardAtIndex:chosenButtonIndex];
+    
+    self.playerStartedGame = YES;
+    [self updateUI];
+}
+
 #pragma mark - Matching Mode
 - (IBAction)changeMatchingModeSegmentedControl:(UISegmentedControl *)sender {
     if (sender.selectedSegmentIndex == SEGMENT_ID_MATCHING_MODE_2) {

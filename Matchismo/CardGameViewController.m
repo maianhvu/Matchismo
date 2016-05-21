@@ -31,15 +31,6 @@
     return _game;
 }
 
-- (IBAction)touchCardButton:(UIButton *)sender
-{
-    int chosenButtonIndex = (int) [self.cardButtons indexOfObject:sender];
-    [self.game chooseCardAtIndex:chosenButtonIndex];
-    
-    self.playerStartedGame = YES;
-    [self updateUI];
-}
-
 - (IBAction)touchRedealButton:(UIButton *)sender {
     _game = nil;
     self.playerStartedGame = NO;
