@@ -8,12 +8,16 @@
 
 #import "CardGameViewController.h"
 #import "CardChoosingResult.h"
+#import "CardGameHistoryViewController.h"
 #import "FunctionalInterface.h"
 #import "NSAttributedStringExtension.h"
+
+static NSString *const SEGUE_ID_SHOW_HISTORY = @"Show History";
 
 @interface CardGameViewController ()
 
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
+@property (nonatomic, strong) NSMutableArray *cardChoosingHistory;
 
 @end
 
@@ -34,6 +38,7 @@
 
 - (IBAction)touchRedealButton:(UIButton *)sender {
     _game = nil;
+    _cardChoosingHistory = nil;
     self.playerStartedGame = NO;
     // Reset all card to face down
     [self updateUI];
@@ -46,28 +51,42 @@
     
     // Update previous choosing result if any
     CardChoosingResult *result = self.game.previousChoosingResult;
+    NSAttributedString *cardChoosingResultString;
     
-    if (result && result.cards.count > 0) {
-        if (result.isMatchPerformed) {
+    if (result) {
+        if (result.cards.count == 0) {
+            cardChoosingResultString = [[NSAttributedString alloc] initWithString:@"Unpicked card."];
+        } else if (result.isMatchPerformed) {
             NSAttributedString *cardsRepresentation = [CardGameViewController stringRepresentationOfCards:result.cards];
             // Gained score
             if (result.score > 0) {
-                self.cardChoosingResultLabel.attributedText = [[[[NSAttributedString alloc] initWithString:@"Matched "] attributedStringByAppendingAttributedString:cardsRepresentation] attributedStringByAppendingString:[NSString stringWithFormat:@" for %lu points!", result.score]];
+                cardChoosingResultString = [[[[NSAttributedString alloc] initWithString:@"Matched "] attributedStringByAppendingAttributedString:cardsRepresentation] attributedStringByAppendingString:[NSString stringWithFormat:@" for %lu points!", result.score]];
             }
             // Received penalty
             else {
-                self.cardChoosingResultLabel.attributedText = [cardsRepresentation attributedStringByAppendingString:[NSString stringWithFormat:@" don't match! %lu points penalty.", -result.score]];
+                cardChoosingResultString = [cardsRepresentation attributedStringByAppendingString:[NSString stringWithFormat:@" don't match! %lu points penalty.", -result.score]];
             }
         } else {
-            self.cardChoosingResultLabel.attributedText = [((Card *)result.cards.lastObject) attributedContents];
+            // Normal flip up, no match performed
+            Card *lastCard = result.cards.lastObject;
+            NSAttributedString *lastCardContent = [lastCard attributedContents];
+            cardChoosingResultString = [[[[NSAttributedString alloc] initWithString:@"Picked "]
+                                        attributedStringByAppendingAttributedString:lastCardContent]
+                                        attributedStringByAppendingString:@"."];
         }
+    }
+    
+    if (cardChoosingResultString) {
+        self.cardChoosingResultLabel.attributedText = cardChoosingResultString;
+        // Add to history
+        [self.cardChoosingHistory addObject:cardChoosingResultString];
     } else {
         self.cardChoosingResultLabel.text = @"";
     }
     
 }
 
-#pragma mark Deck
+#pragma mark - Deck
 // abstract
 - (Deck *)createDeck {
     return nil;
@@ -78,6 +97,27 @@
     return [NSAttributedString attributedStringByJoiningComponents:[cards map:^(id cardObj) {
         return ((Card *) cardObj).attributedContents;
     }] usingString:@" "];
+}
+
+#pragma mark - Getters
+
+- (NSMutableArray *)cardChoosingHistory
+{
+    if (!_cardChoosingHistory) {
+        _cardChoosingHistory = [[NSMutableArray alloc] init];
+    }
+    return _cardChoosingHistory;
+}
+
+#pragma mark - Navigation
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:SEGUE_ID_SHOW_HISTORY] &&
+        [segue.destinationViewController isKindOfClass:[CardGameHistoryViewController class]]) {
+        CardGameHistoryViewController *historyVC = (CardGameHistoryViewController *)segue.destinationViewController;
+        historyVC.history = self.cardChoosingHistory;
+    }
 }
 
 @end

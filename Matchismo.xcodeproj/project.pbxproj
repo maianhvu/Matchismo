@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		170C31081CF1E08500B785CA /* NSAttributedStringExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 170C31071CF1E08500B785CA /* NSAttributedStringExtension.m */; };
+		170C310E1CF20D9300B785CA /* CardGameHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 170C310D1CF20D9300B785CA /* CardGameHistoryViewController.m */; };
 		171035871CDB903E00C2084F /* PlayingCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 171035861CDB903E00C2084F /* PlayingCard.m */; };
 		1710358A1CDB933A00C2084F /* Deck.m in Sources */ = {isa = PBXBuildFile; fileRef = 171035891CDB933A00C2084F /* Deck.m */; };
 		1710358D1CDB949C00C2084F /* PlayingCardDeck.m in Sources */ = {isa = PBXBuildFile; fileRef = 1710358C1CDB949C00C2084F /* PlayingCardDeck.m */; };
@@ -50,6 +51,8 @@
 /* Begin PBXFileReference section */
 		170C31061CF1E08500B785CA /* NSAttributedStringExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSAttributedStringExtension.h; path = Library/NSAttributedStringExtension.h; sourceTree = "<group>"; };
 		170C31071CF1E08500B785CA /* NSAttributedStringExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSAttributedStringExtension.m; path = Library/NSAttributedStringExtension.m; sourceTree = "<group>"; };
+		170C310C1CF20D9300B785CA /* CardGameHistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardGameHistoryViewController.h; sourceTree = "<group>"; };
+		170C310D1CF20D9300B785CA /* CardGameHistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardGameHistoryViewController.m; sourceTree = "<group>"; };
 		171035851CDB903E00C2084F /* PlayingCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayingCard.h; path = Model/PlayingCard.h; sourceTree = "<group>"; };
 		171035861CDB903E00C2084F /* PlayingCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlayingCard.m; path = Model/PlayingCard.m; sourceTree = "<group>"; };
 		171035881CDB933A00C2084F /* Deck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Deck.h; path = Model/Deck.h; sourceTree = "<group>"; };
@@ -169,6 +172,8 @@
 				17876F631CF01AAA007842CA /* SetCardGameViewController.h */,
 				17876F641CF01AAA007842CA /* SetCardGameViewController.m */,
 				17FBC6371CDB677800C541C2 /* Main.storyboard */,
+				170C310C1CF20D9300B785CA /* CardGameHistoryViewController.h */,
+				170C310D1CF20D9300B785CA /* CardGameHistoryViewController.m */,
 				17FBC6611CDB678200C541C2 /* Model */,
 				17FBC63A1CDB677800C541C2 /* Assets.xcassets */,
 				17FBC63C1CDB677800C541C2 /* LaunchScreen.storyboard */,
@@ -359,6 +364,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				170C310E1CF20D9300B785CA /* CardGameHistoryViewController.m in Sources */,
 				17876F5C1CF00424007842CA /* SetCardView.m in Sources */,
 				17876F651CF01AAA007842CA /* SetCardGameViewController.m in Sources */,
 				17FBC6361CDB677800C541C2 /* CardGameViewController.m in Sources */,
