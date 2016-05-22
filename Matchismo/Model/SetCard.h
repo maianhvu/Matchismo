@@ -6,8 +6,8 @@
 //  Copyright © 2016 Anh Vu Mai. All rights reserved.
 //
 
+#import <UIKit/UIKit.h>
 #import "Card.h"
-#import <UIKit/UIColor.h>
 
 typedef NS_ENUM(NSInteger, SetCardSymbol) {
     SetCardSymbolTriangle,

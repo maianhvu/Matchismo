@@ -317,7 +317,7 @@ static CGFloat const CARD_STROKE_WIDTH = 4.0;
 }
 + (UIColor *)highlightColor
 {
-    return [UIColor cyanColor];
+    return [UIColor colorWithRed:0.533 green:0.792 blue:0.341 alpha:1.0];
 }
 + (UIColor *)normalBackgroundColor
 {

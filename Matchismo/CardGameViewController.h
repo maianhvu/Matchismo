@@ -14,6 +14,8 @@
 @interface CardGameViewController : UIViewController
 
 @property (strong, nonatomic) IBOutletCollection(UIView) NSArray *cardButtons;
+@property (weak, nonatomic) IBOutlet UILabel *cardChoosingResultLabel;
+
 @property (strong, nonatomic) CardMatchingGame *game;
 @property (nonatomic) BOOL playerStartedGame;
 

@@ -9,6 +9,7 @@
 #import "SetCardGameViewController.h"
 #import "SetCardDeck.h"
 #import "SetCardView.h"
+#import "NSAttributedStringExtension.h"
 
 @interface SetCardGameViewController ()
 
@@ -78,6 +79,9 @@
 
 - (void)updateUI
 {
+    // Prepare previous choosing results to be used
+    NSArray *previouslyChosenCards = self.game.previousChoosingResult.cards;
+    BOOL didMatchInPreviousMove = self.game.previousChoosingResult.isMatchPerformed;
     // Update card views' appearances
     for (NSUInteger cardIndex = 0; cardIndex < self.cardButtons.count; cardIndex++) {
         if ([self.cardButtons[cardIndex] isKindOfClass:[SetCardView class]]) {
@@ -85,7 +89,7 @@
             SetCard *card = (SetCard *) [self.game cardAtIndex:cardIndex];
             [cardView setCard:card];
             
-            if ([self.game.previousChoosingResult.cards containsObject:card]) {
+            if (didMatchInPreviousMove && [previouslyChosenCards containsObject:card]) {
                 cardView.highlighted = YES;
             }
         }

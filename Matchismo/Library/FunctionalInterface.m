@@ -23,6 +23,7 @@
     return result;
 }
 
+
 - (NSArray *)filter:(BOOL (^)(id))predicate
 {
     NSMutableArray *result = [[NSMutableArray alloc] init];
@@ -32,6 +33,26 @@
         }
     }];
     return result;
+}
+
+- (id)reduce:(id (^)(id, id))reduction withStartingValue:(id)startingValue
+{
+    __block id value = startingValue;
+    [self forEach:^(id object) {
+        value = reduction(value, object);
+    }];
+    return value;
+}
+
+- (NSInteger)integerSum
+{
+    return ((NSNumber *) [[self filter:^(id object) {
+        return [object isKindOfClass:[NSNumber class]];
+    }] reduce:^(id object1, id object2) {
+        NSNumber *number1 = object1;
+        NSNumber *number2 = object2;
+        return @(number1.integerValue + number2.integerValue);
+    } withStartingValue:@0]).integerValue;
 }
 
 - (NSArray *)uniqueUsingComparator:(NSComparisonResult (^)(id, id))comparator

@@ -27,4 +27,12 @@
     return score;
 }
 
+- (NSAttributedString *)attributedContents
+{
+    if (!_attributedContents) {
+        _attributedContents = [[NSAttributedString alloc] initWithString:self.contents];
+    }
+    return _attributedContents;
+}
+
 @end

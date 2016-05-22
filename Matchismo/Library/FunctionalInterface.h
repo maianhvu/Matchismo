@@ -11,6 +11,9 @@
 @interface NSArray (FunctionalInterface)
 
 - (NSArray *)map:(id (^)(id))transform;
+
+- (NSInteger)integerSum;
+
 - (NSArray *)filter:(BOOL (^)(id))predicate;
 
 - (NSArray *)uniqueUsingComparator:(NSComparisonResult (^)(id, id))comparator;

@@ -9,7 +9,15 @@
 #import "SetCard.h"
 #import "FunctionalInterface.h"
 
+static CGFloat const SYMBOL_STROKE_WIDTH = 7.0;
+
+@interface SetCard ()
+
+@end
+
 @implementation SetCard
+
+@synthesize attributedContents = _attributedContents;
 
 #pragma mark - Initialization
 - (instancetype)initWithNumber:(NSUInteger)number
@@ -55,9 +63,9 @@
 {
     
     return @[
-             [UIColor redColor],
-             [UIColor greenColor],
-             [UIColor purpleColor]
+             [UIColor colorWithRed:1.0 green:0.314 blue:0.314 alpha:1.0], // Red
+             [UIColor colorWithRed:0.918 green:0.678 blue:0.0 alpha:1.0], // Yellow
+             [UIColor colorWithRed:0.153 green:0.698 blue:1.0 alpha:1.0]  // Blue
              ];
 }
 
@@ -114,5 +122,61 @@
     
     // Satisfied all conditions
     return YES;
+}
+
+#pragma mark - Contents
+- (NSString *)contents
+{
+    return @"";
+}
+
+- (NSAttributedString *)attributedContents
+{
+    if (!_attributedContents) {
+        NSString *symbolRepresentation = [self stringRepresentationForSymbol];
+        NSString *unstyledContents = [NSString stringWithFormat:@"%lu%@", self.number, symbolRepresentation];
+        
+        NSRange numberRange = NSMakeRange(0,
+                                          unstyledContents.length - symbolRepresentation.length);
+        NSRange symbolRange = NSMakeRange(unstyledContents.length - symbolRepresentation.length,
+                                          symbolRepresentation.length);
+        
+        NSMutableAttributedString *styledContents = [[NSMutableAttributedString alloc] initWithString:unstyledContents];
+        
+        // Set color for the number
+        [styledContents addAttribute:NSForegroundColorAttributeName value:self.color range:numberRange];
+        
+        switch (self.shading) {
+            case SetCardShadingSolid:
+                [styledContents addAttribute:NSForegroundColorAttributeName value:self.color range:symbolRange];
+                break;
+            case SetCardShadingStriped:
+                [styledContents addAttribute:NSStrikethroughStyleAttributeName
+                                       value:@(NSUnderlineStyleDouble)
+                                       range:symbolRange];
+                [styledContents addAttribute:NSStrikethroughColorAttributeName value:self.color range:symbolRange];
+            case SetCardShadingOpen:
+                [styledContents addAttribute:NSStrokeColorAttributeName value:self.color range:symbolRange];
+                [styledContents addAttribute:NSForegroundColorAttributeName value:[UIColor clearColor] range:symbolRange];
+                
+                [styledContents addAttribute:NSStrokeWidthAttributeName value:@(SYMBOL_STROKE_WIDTH) range:symbolRange];
+                break;
+        }
+        _attributedContents = styledContents;
+    }
+    
+    return _attributedContents;
+}
+
+- (NSString *)stringRepresentationForSymbol
+{
+    switch (self.symbol) {
+        case SetCardSymbolTriangle:
+            return @"▲";
+        case SetCardSymbolCircle:
+            return @"●";
+        case SetCardSymbolSquare:
+            return @"■";
+    }
 }
 @end

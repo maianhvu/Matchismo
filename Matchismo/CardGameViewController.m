@@ -9,11 +9,11 @@
 #import "CardGameViewController.h"
 #import "CardChoosingResult.h"
 #import "FunctionalInterface.h"
+#import "NSAttributedStringExtension.h"
 
 @interface CardGameViewController ()
 
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
-@property (weak, nonatomic) IBOutlet UILabel *cardChoosingResultLabel;
 
 @end
 
@@ -49,23 +49,22 @@
     
     if (result && result.cards.count > 0) {
         if (result.isMatchPerformed) {
-            NSString *cardsRepresentation = [CardGameViewController stringRepresentationOfCards:result.cards];
+            NSAttributedString *cardsRepresentation = [CardGameViewController stringRepresentationOfCards:result.cards];
             // Gained score
             if (result.score > 0) {
-                self.cardChoosingResultLabel.text = [NSString stringWithFormat:@"Matched %@ for %d points!",
-                                                     cardsRepresentation, (int) result.score];
+                self.cardChoosingResultLabel.attributedText = [[[[NSAttributedString alloc] initWithString:@"Matched "] attributedStringByAppendingAttributedString:cardsRepresentation] attributedStringByAppendingString:[NSString stringWithFormat:@" for %lu points!", result.score]];
             }
             // Received penalty
             else {
-                self.cardChoosingResultLabel.text = [NSString stringWithFormat:@"%@ don't match! %d points penalty.",
-                                                     cardsRepresentation, (int)-result.score];
+                self.cardChoosingResultLabel.attributedText = [cardsRepresentation attributedStringByAppendingString:[NSString stringWithFormat:@" don't match! %lu points penalty.", -result.score]];
             }
         } else {
-            self.cardChoosingResultLabel.text = [result.cards.lastObject contents];
+            self.cardChoosingResultLabel.attributedText = [((Card *)result.cards.lastObject) attributedContents];
         }
     } else {
         self.cardChoosingResultLabel.text = @"";
     }
+    
 }
 
 #pragma mark Deck
@@ -74,13 +73,11 @@
     return nil;
 }
 
-+ (NSString *)stringRepresentationOfCards:(NSArray *)cards
++ (NSAttributedString *)stringRepresentationOfCards:(NSArray *)cards
 {
-    NSArray *contents = [cards map:^(id cardObj){
-        Card* card = (Card *)cardObj;
-        return [card contents];
-    }];
-    return [contents componentsJoinedByString:@" "];
+    return [NSAttributedString attributedStringByJoiningComponents:[cards map:^(id cardObj) {
+        return ((Card *) cardObj).attributedContents;
+    }] usingString:@" "];
 }
 
 @end

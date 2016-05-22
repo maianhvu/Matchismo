@@ -6,7 +6,7 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Playing Cards-->
+        <!--Playing Card-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="PlayingCardGameViewController" sceneMemberID="viewController">
@@ -25,7 +25,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="yVN-GM-uQV">
-                                <rect key="frame" x="220" y="405" width="160" height="29"/>
+                                <rect key="frame" x="220" y="373" width="160" height="29"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="28" id="GuB-Zf-UJL"/>
                                     <constraint firstAttribute="width" constant="160" id="NhK-8e-jRI"/>
@@ -40,7 +40,7 @@
                                 </connections>
                             </segmentedControl>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Matching Mode" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nh2-Ae-B5F">
-                                <rect key="frame" x="240" y="376" width="120" height="21"/>
+                                <rect key="frame" x="240" y="344" width="120" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="120" id="cQH-oT-OTk"/>
                                 </constraints>
@@ -55,7 +55,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pUR-lo-loD">
-                                <rect key="frame" x="160" y="28" width="280" height="332"/>
+                                <rect key="frame" x="160" y="72" width="280" height="264"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rBI-4h-OrN">
                                         <rect key="frame" x="0.0" y="0.0" width="40" height="60"/>
@@ -273,64 +273,10 @@
                                             <action selector="touchCardButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bJk-lv-DQ1"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d70-Fb-8WU">
-                                        <rect key="frame" x="0.0" y="272" width="40" height="60"/>
-                                        <state key="normal" backgroundImage="cardback">
-                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="touchCardButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="QwH-at-D1a"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xPB-NE-I4t">
-                                        <rect key="frame" x="48" y="272" width="40" height="60"/>
-                                        <state key="normal" backgroundImage="cardback">
-                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="touchCardButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Lit-mu-OUz"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yQZ-S3-cz5">
-                                        <rect key="frame" x="96" y="272" width="40" height="60"/>
-                                        <state key="normal" backgroundImage="cardback">
-                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="touchCardButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="kVG-RQ-RWn"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fTC-7C-u0d">
-                                        <rect key="frame" x="144" y="272" width="40" height="60"/>
-                                        <state key="normal" backgroundImage="cardback">
-                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="touchCardButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="JRT-fK-OT4"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sad-PB-9iA">
-                                        <rect key="frame" x="192" y="272" width="40" height="60"/>
-                                        <state key="normal" backgroundImage="cardback">
-                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="touchCardButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="22W-gV-aAA"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OJH-ky-Uvw">
-                                        <rect key="frame" x="240" y="272" width="40" height="60"/>
-                                        <state key="normal" backgroundImage="cardback">
-                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="touchCardButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="noI-5p-79y"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="280" id="1sS-cc-wD5"/>
-                                    <constraint firstAttribute="height" constant="332" id="GIN-Fr-ZfZ"/>
+                                    <constraint firstAttribute="height" constant="264" id="GIN-Fr-ZfZ"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eVA-Ef-aRk">
@@ -356,7 +302,7 @@
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="bPC-y4-yQY" secondAttribute="bottom" constant="20" id="Fkj-dB-f27"/>
                             <constraint firstAttribute="trailingMargin" secondItem="6UU-Gn-jfJ" secondAttribute="trailing" id="KDM-Hj-T6k"/>
                             <constraint firstItem="Nh2-Ae-B5F" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Lav-O6-Of7"/>
-                            <constraint firstItem="Nh2-Ae-B5F" firstAttribute="top" secondItem="pUR-lo-loD" secondAttribute="bottom" constant="16" id="M79-jf-P7I"/>
+                            <constraint firstItem="Nh2-Ae-B5F" firstAttribute="top" secondItem="pUR-lo-loD" secondAttribute="bottom" constant="8" id="M79-jf-P7I"/>
                             <constraint firstItem="bPC-y4-yQY" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="Nzz-ma-aYT"/>
                             <constraint firstItem="yVN-GM-uQV" firstAttribute="top" secondItem="Nh2-Ae-B5F" secondAttribute="bottom" constant="8" id="O0A-R7-gLP"/>
                             <constraint firstItem="yVN-GM-uQV" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="OOv-vh-M9y"/>
@@ -373,7 +319,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Playing Cards" id="Hmx-dK-tpT"/>
+                    <navigationItem key="navigationItem" title="Playing Card" id="U3r-9L-2jP"/>
                     <connections>
                         <outlet property="cardChoosingResultLabel" destination="6UU-Gn-jfJ" id="ArO-Iq-6OF"/>
                         <outlet property="matchingModeSegmentedControl" destination="yVN-GM-uQV" id="PDb-W9-MqN"/>
@@ -402,17 +348,11 @@
                         <outletCollection property="cardButtons" destination="TWf-Ti-DcO" id="eL6-bj-J4o"/>
                         <outletCollection property="cardButtons" destination="AnS-Tj-rYJ" id="ObT-Aq-D4Z"/>
                         <outletCollection property="cardButtons" destination="gFN-7N-paR" id="ui1-CR-9hI"/>
-                        <outletCollection property="cardButtons" destination="d70-Fb-8WU" id="5JM-Xy-8DE"/>
-                        <outletCollection property="cardButtons" destination="xPB-NE-I4t" id="B6F-3k-ZhZ"/>
-                        <outletCollection property="cardButtons" destination="yQZ-S3-cz5" id="jbG-Fb-tx0"/>
-                        <outletCollection property="cardButtons" destination="fTC-7C-u0d" id="SNP-ZP-p7z"/>
-                        <outletCollection property="cardButtons" destination="sad-PB-9iA" id="GLr-DG-4K0"/>
-                        <outletCollection property="cardButtons" destination="OJH-ky-Uvw" id="6tv-l1-dyT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1122" y="354"/>
+            <point key="canvasLocation" x="1934" y="354"/>
         </scene>
         <!--Set-->
         <scene sceneID="NzU-60-evt">
@@ -454,17 +394,8 @@
                                     <action selector="touchRedealButton:" destination="04G-a1-3xY" eventType="touchUpInside" id="Irj-EX-b1Q"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6b4-dB-xjE">
-                                <rect key="frame" x="20" y="481" width="560" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="pET-bv-O0Z"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qY9-9b-g9Y">
-                                <rect key="frame" x="160" y="28" width="280" height="400"/>
+                                <rect key="frame" x="160" y="72" width="280" height="332"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vZu-4t-8gH" customClass="SetCardView">
                                         <rect key="frame" x="48" y="0.0" width="40" height="60"/>
@@ -586,36 +517,21 @@
                                         <rect key="frame" x="0.0" y="0.0" width="40" height="60"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2aq-8K-Otu" customClass="SetCardView">
-                                        <rect key="frame" x="0.0" y="340" width="40" height="60"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    </view>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="keu-gn-Jkg" customClass="SetCardView">
-                                        <rect key="frame" x="48" y="340" width="40" height="60"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    </view>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nGL-T5-jcU" customClass="SetCardView">
-                                        <rect key="frame" x="96" y="340" width="40" height="60"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    </view>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ndk-US-F6d" customClass="SetCardView">
-                                        <rect key="frame" x="144" y="340" width="40" height="60"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    </view>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sdZ-kj-ne5" customClass="SetCardView">
-                                        <rect key="frame" x="192" y="340" width="40" height="60"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    </view>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mCc-q2-6MV" customClass="SetCardView">
-                                        <rect key="frame" x="240" y="340" width="40" height="60"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="400" id="9Na-Gu-GYl"/>
+                                    <constraint firstAttribute="height" constant="332" id="9Na-Gu-GYl"/>
                                     <constraint firstAttribute="width" constant="280" id="RBf-2q-UnE"/>
                                 </constraints>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Match result" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6b4-dB-xjE">
+                                <rect key="frame" x="20" y="460" width="560" height="42"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="42" id="pET-bv-O0Z"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="0.25098040700000002" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -641,7 +557,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Set" id="jNO-X1-WjH"/>
+                    <navigationItem key="navigationItem" title="Set" id="8Bv-gz-aeM"/>
                     <connections>
                         <outlet property="cardChoosingResultLabel" destination="6b4-dB-xjE" id="oTy-41-GI6"/>
                         <outlet property="scoreLabel" destination="qYx-ZZ-JD0" id="GJ6-5o-Vcy"/>
@@ -675,17 +591,11 @@
                         <outletCollection property="cardButtons" destination="Ziq-uZ-7vV" id="xhJ-DS-JtH"/>
                         <outletCollection property="cardButtons" destination="YpX-hl-Df8" id="P3Y-Pj-0qz"/>
                         <outletCollection property="cardButtons" destination="wth-pd-xgf" id="FlO-QK-a3N"/>
-                        <outletCollection property="cardButtons" destination="mCc-q2-6MV" id="uSR-5B-x9y"/>
-                        <outletCollection property="cardButtons" destination="sdZ-kj-ne5" id="VHc-qJ-n3U"/>
-                        <outletCollection property="cardButtons" destination="Ndk-US-F6d" id="l6T-Ms-HYi"/>
-                        <outletCollection property="cardButtons" destination="nGL-T5-jcU" id="V3v-tX-NEw"/>
-                        <outletCollection property="cardButtons" destination="keu-gn-Jkg" id="1hk-47-jON"/>
-                        <outletCollection property="cardButtons" destination="2aq-8K-Otu" id="4De-7I-xjU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hMC-QB-eyS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1122" y="1044"/>
+            <point key="canvasLocation" x="1934" y="1044"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="5Jb-Ex-d14">
@@ -698,16 +608,56 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="2Ec-6Z-5dM"/>
-                        <segue destination="04G-a1-3xY" kind="relationship" relationship="viewControllers" id="qlq-fd-MDi"/>
+                        <segue destination="A7H-Ky-wuj" kind="relationship" relationship="viewControllers" id="2Ec-6Z-5dM"/>
+                        <segue destination="gs2-G0-zz1" kind="relationship" relationship="viewControllers" id="qlq-fd-MDi"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KVN-Ee-xHi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="292" y="664"/>
         </scene>
+        <!--Playing Cards-->
+        <scene sceneID="P4L-NG-SJu">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="A7H-Ky-wuj" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Playing Cards" image="playingcards" id="Hmx-dK-tpT"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="MBg-d8-JhW">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="hrl-FZ-Wga"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="U7k-1M-HLb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1122" y="354"/>
+        </scene>
+        <!--Set-->
+        <scene sceneID="5n4-ti-e7v">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="gs2-G0-zz1" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Set" image="setcards" id="jNO-X1-WjH"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="cT2-lY-3YC">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="04G-a1-3xY" kind="relationship" relationship="rootViewController" id="Bnh-15-HLN"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0jn-q7-ibt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1122" y="1044"/>
+        </scene>
     </scenes>
     <resources>
         <image name="cardback" width="64" height="96"/>
+        <image name="playingcards" width="25" height="25"/>
+        <image name="setcards" width="25" height="25"/>
     </resources>
 </document>
