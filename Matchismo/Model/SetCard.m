@@ -89,7 +89,7 @@ static CGFloat const SYMBOL_STROKE_WIDTH = 7.0;
         SetCard *card = (SetCard *)cardObj;
         return @(card.number);
     }] uniqueNumbers];
-    if ([uniqueNumbers count] != 1 && [uniqueNumbers count] != 3) {
+    if (uniqueNumbers.count != 1 && uniqueNumbers.count != 3) {
         return NO;
     }
     
@@ -98,7 +98,7 @@ static CGFloat const SYMBOL_STROKE_WIDTH = 7.0;
         SetCard *card = (SetCard *)cardObj;
         return @(card.symbol);
     }] uniqueNumbers];
-    if ([uniqueSymbols count] != 1 && [uniqueSymbols count] != 3) {
+    if (uniqueSymbols.count != 1 && uniqueSymbols.count != 3) {
         return NO;
     }
     
@@ -107,7 +107,7 @@ static CGFloat const SYMBOL_STROKE_WIDTH = 7.0;
         SetCard *card = (SetCard *)cardObj;
         return @(card.shading);
     }] uniqueNumbers];
-    if ([uniqueShadings count] != 1 && [uniqueShadings count] != 3) {
+    if (uniqueShadings.count != 1 && uniqueShadings.count != 3) {
         return NO;
     }
     
@@ -116,7 +116,7 @@ static CGFloat const SYMBOL_STROKE_WIDTH = 7.0;
         SetCard *card = (SetCard *)cardObj;
         return card.color;
     }] uniqueUsingDescription];
-    if ([uniqueColors count] != 1 && [uniqueColors count] != 3) {
+    if (uniqueColors.count != 1 && uniqueColors.count != 3) {
         return NO;
     }
     
